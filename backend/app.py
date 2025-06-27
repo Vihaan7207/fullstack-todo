@@ -12,7 +12,19 @@ app = Flask(__name__)
 @app.route('/')
 # ‘/’ URL is bound with hello_world() function.
 def hello_world():
+    print("GET request")
     return 'Hello World'
+
+array = [1, 2, 3, 4, 5]
+
+@app.get('/nums')
+def get_nums():
+    return array
+
+@app.post('/nums')
+def add_num():
+    array.append(len(array) + 1)
+    return 'success'
 
 # main driver function
 if __name__ == '__main__':
