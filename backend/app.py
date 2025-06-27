@@ -1,10 +1,13 @@
 # Importing flask module in the project is mandatory
 # An object of Flask class is our WSGI application.
-from flask import Flask
+from flask import Flask, jsonify
+from flask_cors import CORS
 
 # Flask constructor takes the name of 
 # current module (__name__) as argument.
 app = Flask(__name__)
+# Enable CORS for all routes
+CORS(app)
 
 # The route() function of the Flask class is a decorator, 
 # which tells the application which URL should call 
@@ -19,7 +22,7 @@ array = [1, 2, 3, 4, 5]
 
 @app.get('/nums')
 def get_nums():
-    return array
+    return jsonify(array)
 
 @app.post('/nums')
 def add_num():

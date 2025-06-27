@@ -9,22 +9,37 @@ function App() {
   const update = () => {
     axios.get('http://127.0.0.1:5000/nums')
       .then((res) => {
+        console.log(res.data);
+        
         setNums(res.data);
       });
+  }
+
+  const add = () => {
+    axios.post('http://127.0.0.1:5000/nums')
+      .then(res => {
+        console.log(res);
+      })
+      .catch(error => {
+        console.log(error);
+      })
+      update();
   }
 
   useEffect(update, []);
 
   return (
     <>
-      <button onClick={update}>
-        Update
+
+
+      <button onClick={add}>
+        Add Number
       </button>
 
       <ul>
-        {nums.map(num => {
-          <li>{num}</li>
-        })}
+        {nums.map((num, index) => (
+          <li key={index}>{num}</li>
+        ))}
       </ul>
     </>
   )
